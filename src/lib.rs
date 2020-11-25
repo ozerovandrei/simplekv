@@ -1,6 +1,4 @@
 use std::collections::HashMap;
-use std::error::Error;
-use std::fmt;
 use std::fs::{File, OpenOptions};
 use std::io;
 use std::io::prelude::*;
