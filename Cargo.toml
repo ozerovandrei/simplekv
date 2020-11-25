@@ -13,7 +13,3 @@ crc = "1.8"
 [lib]
 name = "libsimplekv"
 path = "src/lib.rs"
-
-[[bin]]
-name = "skv_mem"
-src = "src/srv_mem.rs"
