@@ -152,4 +152,52 @@ impl SimpleKV {
 
         Ok(current_position)
     }
+
+    pub fn get(&mut self, key: &ByteStr) -> io::Result<Option<ByteString>> {
+        let position = match self.index.get(key) {
+            None => return Ok(None),
+            Some(position) => *position,
+        };
+
+        let kv = self.get_at(position)?;
+
+        Ok(Some(ByteString::from(kv.value)))
+    }
+
+    pub fn get_at(&mut self, position: u64) -> io::Result<KeyValuePair> {
+        let mut f = BufReader::new(&mut self.f);
+        f.seek(SeekFrom::start(position))?;
+        let kv = SimpleKV::process_record(&mut f)?;
+
+        Ok(kv)
+    }
+
+    pub fn find(&mut self, target: &ByteStr) -> io::Result<Option(u64, ByteString)> {
+        let mut f = BufReader::new(&mut self.f);
+
+        let mut found: Option<(u64, ByteString)> = None;
+
+        loop {
+            let position = f.seek(SeekFrom::Current(0))?;
+
+            let maybe_kv = SimpleKV::process_record(&mut f);
+            let kv = match maybe_kv {
+                Ok(kv) => kv,
+                Err(err) => match err.kind() {
+                    io::ErrorKind::UnexpectedEof => {
+                        break;
+                    }
+                    _ => return Err(err),
+                },
+            };
+
+            if kv.key == target {
+                found = Some((position, kv.value));
+            }
+
+            // Loop until the end of the file in case the key has been overwritten.
+        }
+
+        Ok(found)
+    }
 }
