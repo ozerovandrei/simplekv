@@ -200,4 +200,9 @@ impl SimpleKV {
 
         Ok(found)
     }
+
+    #[inline]
+    pub fn update(&mut self, key: &ByteStr, value: &ByteStr) -> io::Result<()> {
+        self.insert(key, value)
+    }
 }
