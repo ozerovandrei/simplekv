@@ -166,7 +166,7 @@ impl SimpleKV {
 
     pub fn get_at(&mut self, position: u64) -> io::Result<KeyValuePair> {
         let mut f = BufReader::new(&mut self.f);
-        f.seek(SeekFrom::start(position))?;
+        f.seek(SeekFrom::Start(position))?;
         let kv = SimpleKV::process_record(&mut f)?;
 
         Ok(kv)
