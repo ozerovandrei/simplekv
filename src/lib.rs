@@ -148,7 +148,7 @@ impl SimpleKV {
         f.write_u32::<LittleEndian>(checksum)?;
         f.write_u32::<LittleEndian>(key_len as u32)?;
         f.write_u32::<LittleEndian>(val_len as u32)?;
-        f.write_all(&mut tmp)?;
+        f.write_all(&tmp)?;
 
         Ok(current_position)
     }
