@@ -11,7 +11,7 @@ use crc::crc32;
 type ByteString = Vec<u8>;
 type ByteStr = [u8];
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug)]
 pub struct KeyValuePair {
     pub key: ByteString,
     pub value: ByteString,
