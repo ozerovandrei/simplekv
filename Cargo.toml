@@ -7,8 +7,11 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+bincode = "1.3"
 byteorder = "1.3"
 crc = "1.8"
+serde = "1.0"
+serde_derive = "1.0"
 
 [lib]
 name = "libsimplekv"
@@ -17,3 +20,7 @@ path = "src/lib.rs"
 [[bin]]
 name = "skv_mem"
 path = "src/skv_mem.rs"
+
+[[bin]]
+name = "skv_disk"
+path = "src/skv_disk.rs"
