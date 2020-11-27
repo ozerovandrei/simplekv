@@ -161,7 +161,7 @@ impl SimpleKV {
 
         let kv = self.get_at(position)?;
 
-        Ok(Some(ByteString::from(kv.value)))
+        Ok(Some(kv.value))
     }
 
     pub fn get_at(&mut self, position: u64) -> io::Result<KeyValuePair> {
